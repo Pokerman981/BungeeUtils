@@ -1,0 +1,4 @@
+name: TestPlugin
+main: me.pokerman981.BungeeUtils.Main
+version: 1.0
+author: Pokerman981
