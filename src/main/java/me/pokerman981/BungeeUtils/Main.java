@@ -1,3 +1,14 @@
+/*
+ * Copyright © 2020. Troy Gidney
+ * All rights reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ *
+ * File Last Modified: 8/28/20, 6:00 AM
+ * File: Main.java
+ * Project: BungeeUtils
+ */
+
 package me.pokerman981.BungeeUtils;
 
 import me.pokerman981.BungeeUtils.commands.StaffChatCommand;
@@ -32,7 +43,7 @@ public class Main extends Plugin {
     }
 
     private void registerCommands() {
-        getProxy().getPluginManager().registerCommand(this, new StaffChatCommand("adminchat", "bungeeutils.adminchat", "a", "ac"));
+        getProxy().getPluginManager().registerCommand(this, new StaffChatCommand("adminchat", "bungeeutils.adminchat", "a", "ac", "sc", "staffchat"));
     }
 
     @Override
