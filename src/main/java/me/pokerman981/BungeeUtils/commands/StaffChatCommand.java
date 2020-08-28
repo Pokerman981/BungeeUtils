@@ -4,7 +4,7 @@
  * Unauthorized copying of this file, via any medium is strictly prohibited
  * Proprietary and confidential
  *
- * File Last Modified: 8/28/20, 5:59 AM
+ * File Last Modified: 8/28/20, 6:04 AM
  * File: StaffChatCommand.java
  * Project: BungeeUtils
  */
@@ -31,7 +31,7 @@ public class StaffChatCommand extends Command {
         }
         if (strings.length <= 0) return;
 
-        String messageToSend = String.join(" ", strings).replace("\\", "\\\\")
+        String messageWords = String.join(" ", strings).replace("\\", "\\\\")
                 .replace("\t", "\\t")
                 .replace("\b", "\\b")
                 .replace("\n", "\\n")
@@ -40,20 +40,17 @@ public class StaffChatCommand extends Command {
                 .replace("'", "\\'")
                 .replace("\"", "\\\"");
 
-        Utils.msg(Main.instance.getProxy().getConsole(), Main.messages.getOrDefault("admin-chat", "Config Error!")
+        String messageToSend = Main.messages.getOrDefault("admin-chat", "Config Error!")
                 .replaceAll("%player%", commandSender.getName())
-                .replaceAll("%message%", messageToSend));
+                .replaceAll("%message%", messageWords);
 
+        Utils.msg(Main.instance.getProxy().getConsole(), messageToSend);
 
         Main.instance.getProxy().getPlayers().forEach(proxiedPlayer -> {
             if (proxiedPlayer.hasPermission(super.getPermission()) && commandSender != Main.instance.getProxy().getConsole())
-                Utils.msg(proxiedPlayer, Main.messages.getOrDefault("admin-chat", "Config Error!")
-                        .replaceAll("%player%", commandSender.getName())
-                        .replaceAll("%message%", messageToSend), ((ProxiedPlayer) commandSender).getServer().getInfo().getName());
+                Utils.msg(proxiedPlayer, messageToSend, ((ProxiedPlayer) commandSender).getServer().getInfo().getName());
             else
-                Utils.msg(proxiedPlayer, Main.messages.getOrDefault("admin-chat", "Config Error!")
-                        .replaceAll("%player%", commandSender.getName())
-                        .replaceAll("%message%", messageToSend));
+                Utils.msg(proxiedPlayer, messageToSend);
         });
     }
 }
