@@ -40,7 +40,5 @@ public class StaffChatCommand extends Command {
                         .replaceAll("%player%", commandSender.getName())
                         .replaceAll("%message%", messageToSend), ((ProxiedPlayer) commandSender).getServer().getInfo().getName());
         });
-        //  Main.instance.getProxy().getPlayer(commandSender.getName()).getServer().getInfo().getName()
-
     }
 }
