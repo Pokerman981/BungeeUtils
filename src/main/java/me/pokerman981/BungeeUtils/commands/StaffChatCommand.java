@@ -1,3 +1,14 @@
+/*
+ * Copyright © 2020. Troy Gidney
+ * All rights reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ *
+ * File Last Modified: 8/28/20, 5:59 AM
+ * File: StaffChatCommand.java
+ * Project: BungeeUtils
+ */
+
 package me.pokerman981.BungeeUtils.commands;
 
 import me.pokerman981.BungeeUtils.Main;
@@ -35,10 +46,14 @@ public class StaffChatCommand extends Command {
 
 
         Main.instance.getProxy().getPlayers().forEach(proxiedPlayer -> {
-            if (proxiedPlayer.hasPermission(super.getPermission()))
+            if (proxiedPlayer.hasPermission(super.getPermission()) && commandSender != Main.instance.getProxy().getConsole())
                 Utils.msg(proxiedPlayer, Main.messages.getOrDefault("admin-chat", "Config Error!")
                         .replaceAll("%player%", commandSender.getName())
                         .replaceAll("%message%", messageToSend), ((ProxiedPlayer) commandSender).getServer().getInfo().getName());
+            else
+                Utils.msg(proxiedPlayer, Main.messages.getOrDefault("admin-chat", "Config Error!")
+                        .replaceAll("%player%", commandSender.getName())
+                        .replaceAll("%message%", messageToSend));
         });
     }
 }
