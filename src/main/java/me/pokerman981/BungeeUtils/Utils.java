@@ -4,7 +4,7 @@
  * Unauthorized copying of this file, via any medium is strictly prohibited
  * Proprietary and confidential
  *
- * File Last Modified: 8/28/20, 6:00 AM
+ * File Last Modified: 9/5/20, 2:45 AM
  * File: Utils.java
  * Project: BungeeUtils
  */
@@ -19,13 +19,16 @@ import net.md_5.bungee.api.chat.TextComponent;
 
 public class Utils {
 
-    public static void msg(CommandSender sender, String msg) {
-        sender.sendMessage(new ComponentBuilder(color(msg)).create());
+    public static void msg(CommandSender sender, String msg, ChatColor overrideColor) {
+        TextComponent textComponent = new TextComponent(getText(msg));
+        textComponent.setColor(overrideColor);
+        sender.sendMessage(textComponent);
     }
 
-    public static void msg(CommandSender sender, String msg, String hoverText) {
-        TextComponent textComponent = new TextComponent(color(msg));
-        HoverEvent hoverEvent = new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(color(hoverText)).create());
+    public static void msg(CommandSender sender, String msg, ChatColor overrideColor, String hoverText) {
+        TextComponent textComponent = new TextComponent(getText(msg));
+        HoverEvent hoverEvent = new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(getText(hoverText)).create());
+        textComponent.setColor(overrideColor);
 
         textComponent.setHoverEvent(hoverEvent);
         sender.sendMessage(textComponent);

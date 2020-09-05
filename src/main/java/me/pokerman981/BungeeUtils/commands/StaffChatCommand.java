@@ -4,7 +4,7 @@
  * Unauthorized copying of this file, via any medium is strictly prohibited
  * Proprietary and confidential
  *
- * File Last Modified: 8/28/20, 6:04 AM
+ * File Last Modified: 9/5/20, 2:52 AM
  * File: StaffChatCommand.java
  * Project: BungeeUtils
  */
@@ -13,6 +13,7 @@ package me.pokerman981.BungeeUtils.commands;
 
 import me.pokerman981.BungeeUtils.Main;
 import me.pokerman981.BungeeUtils.Utils;
+import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
@@ -26,7 +27,7 @@ public class StaffChatCommand extends Command {
     @Override
     public void execute(CommandSender commandSender, String[] strings) {
         if (!commandSender.hasPermission(super.getPermission())) {
-            Utils.msg(commandSender, Main.messages.getOrDefault("no-perm", "Config Error!"));
+            Utils.msg(commandSender, Main.messages.getOrDefault("no-perm", "Config Error!"), ChatColor.RED);
             return;
         }
         if (strings.length <= 0) return;
@@ -44,13 +45,13 @@ public class StaffChatCommand extends Command {
                 .replaceAll("%player%", commandSender.getName())
                 .replaceAll("%message%", messageWords);
 
-        Utils.msg(Main.instance.getProxy().getConsole(), messageToSend);
+        Utils.msg(Main.instance.getProxy().getConsole(), messageToSend, ChatColor.AQUA);
 
         Main.instance.getProxy().getPlayers().forEach(proxiedPlayer -> {
             if (proxiedPlayer.hasPermission(super.getPermission()) && commandSender != Main.instance.getProxy().getConsole())
-                Utils.msg(proxiedPlayer, messageToSend, ((ProxiedPlayer) commandSender).getServer().getInfo().getName());
+                Utils.msg(proxiedPlayer, messageToSend, ChatColor.AQUA, ((ProxiedPlayer) commandSender).getServer().getInfo().getName());
             else
-                Utils.msg(proxiedPlayer, messageToSend);
+                Utils.msg(proxiedPlayer, messageToSend, ChatColor.AQUA);
         });
     }
 }
