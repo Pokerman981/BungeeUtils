@@ -4,7 +4,7 @@
  * Unauthorized copying of this file, via any medium is strictly prohibited
  * Proprietary and confidential
  *
- * File Last Modified: 9/5/20, 2:52 AM
+ * File Last Modified: 9/5/20, 10:05 AM
  * File: StaffChatCommand.java
  * Project: BungeeUtils
  */
@@ -50,8 +50,6 @@ public class StaffChatCommand extends Command {
         Main.instance.getProxy().getPlayers().forEach(proxiedPlayer -> {
             if (proxiedPlayer.hasPermission(super.getPermission()) && commandSender != Main.instance.getProxy().getConsole())
                 Utils.msg(proxiedPlayer, messageToSend, ChatColor.AQUA, ((ProxiedPlayer) commandSender).getServer().getInfo().getName());
-            else
-                Utils.msg(proxiedPlayer, messageToSend, ChatColor.AQUA);
         });
     }
 }
